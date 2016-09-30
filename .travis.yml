@@ -20,7 +20,11 @@ jdk:
   - oraclejdk8
 
 script:
-  - sbt "set parallelExecution in Global := false" +test
+  # - sbt "set parallelExecution in Global := false" +test
+  - sbt clean coverage "set parallelExecution in Global := false" +test coverageReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   webhooks:
